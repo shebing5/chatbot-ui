@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+
 export function middleware(req) {
   const credentials = req.headers.get("Authorization");
   if (!credentials) {
@@ -31,8 +32,5 @@ export function middleware(req) {
     });
   }
 
-  // Only run this middleware for the about/* path
-  if (new URLPattern("/about/*").test(req.nextUrl.pathname)) {
-    return NextResponse.next();
-  }
+  return NextResponse.next();
 }
