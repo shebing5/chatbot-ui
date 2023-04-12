@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 
-
 export function middleware(req) {
   const credentials = req.headers.get("Authorization");
   if (!credentials) {
@@ -32,5 +31,11 @@ export function middleware(req) {
     });
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    headers: {
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+    },
+  });
 }
